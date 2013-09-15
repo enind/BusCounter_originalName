@@ -1,0 +1,21 @@
+.cliker_box
+{
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+.clicker_button
+{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background-color: green;
+}
+.clicker_button_left
+{
+    left: 0px;
+}
+.clicker_button_right
+{
+    right: 0px;
+}
