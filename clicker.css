@@ -1,3 +1,7 @@
+body
+{
+    margin: 0px;
+    }
 .cliker_box
 {
     position: relative;
@@ -6,7 +10,7 @@
 }
 .clicker_button
 {
-    position: relative;
+    position: absolute;
     width: 50%;
     height: 100%;
     background-color: green;

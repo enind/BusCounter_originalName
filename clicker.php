@@ -9,7 +9,7 @@
      <div class="clicker_button_left clicker_button">
      	  Out
      </div>
-     <div class="clicker_button_left clicker_button">
+     <div class="clicker_button_right clicker_button">
      	  In
      </div>
 </div>
