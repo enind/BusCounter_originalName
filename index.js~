@@ -1,8 +1,0 @@
-function Login()
-{
-    var dat = {};
-    dat.login = document.getElementById("login").value;
-    dat.pass = document.getElementById("pass").value;
-    var json = JSON.stringfly(dat);
-    alert(json);
-}
