@@ -1,0 +1,11 @@
+<?php
+
+?>
+<div class="clicker_box">
+     <div class="clicker_button_left">
+     	  Out
+     </div>
+     <div class="clicker_button_left">
+     	  In
+     </div>
+</div>

@@ -1,7 +1,8 @@
 body
 {
     margin: 0px;
-    }
+    background-color: #F0FFFF;
+}
 .cliker_box
 {
     position: relative;
@@ -11,9 +12,11 @@ body
 .clicker_button
 {
     position: absolute;
-    width: 50%;
-    height: 100%;
-    background-color: green;
+    width: 49%;
+    height: 80%;
+    background-color: #8ed465;
+    text-align: center;
+    font-size: 30pt;
 }
 .clicker_button_left
 {
@@ -22,4 +25,14 @@ body
 .clicker_button_right
 {
     right: 0px;
+}
+.send_button
+{
+    position: absolute;
+    bottom: 0px;
+    height: 19%;
+    width: 100%;
+    background-color: #1E90FF;
+     text-align: center;
+    font-size: 30pt;
 }
