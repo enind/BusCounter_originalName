@@ -1,27 +1,50 @@
 <?php
 function db_connect()
 {
-	echo 1;
-	$con = mysqli_connect("192.168.100.155","root","2143","busconter") or die ("fuck");
-	echo "2";
+	$con = mysqli_connect("mysql.hostinger.ru","u403157676_db","891621275","u403157676_bc") or die ("fuck");
 	return $con;
 }
 ?>
 <?php
 $data = $_REQUEST["json"];
 $data = json_decode($data);
-var_dump($data);
+//var_dump($data);
 
 $con = db_connect();
-echo "olo1";
-
-$result = $con->query($query);
-
-//display information:
-
-while($row = mysqli_fecth_array($result)) {
-  echo $row["login"] . "<br>";
+$res = null;
+switch($data->type)
+{
+	case NULL:
+	     break;
+	case "auth":
+	     $res = auth($data->login,$data->pass);
 }
+echo json_encode($res);
 $con->close();
-echo "olo";
+?>
+
+<?php
+function auth($login, $pass)
+{
+	global $con;
+	$session = rand(0,100000000);
+	$sql = "SELECT * FROM `login` WHERE `login`='$login' AND `pass`='$pass'";
+	$result = $con->query($sql);
+	$obj = null;
+	if($result->num_rows!=0)
+	{
+		$obj->session = $session;
+		$obj->status = true;
+	}
+	else
+	{
+		$obj->status = false;
+	}
+/*	
+	while($row = mysqli_fetch_array($result)) {
+		   echo $row["login"] . "<br>";
+		   }
+*/
+	return $obj;
+}
 ?>
