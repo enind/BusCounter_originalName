@@ -18,8 +18,10 @@ switch($data->type)
 	     break;
 	case "auth":
 	     $res = auth($data->login,$data->pass);
+	     break;
 	case "inout":
-	     $res = inout($data->bus_in,$data->bus_out);
+	     $res = inout($data->bus_in,$data->bus_out,$data->session);
+	     break;
 }
 echo json_encode($res);
 $con->close();
@@ -37,19 +39,16 @@ function auth($login, $pass)
 	{
 		$obj->session = $session;
 		$obj->status = true;
+		$sql = "UPDATE `login` SET `session`=$session WHERE `login`='$login'";
+		$con->query($sql);
 	}
 	else
 	{
 		$obj->status = false;
 	}
-/*	
-	while($row = mysqli_fetch_array($result)) {
-		   echo $row["login"] . "<br>";
-		   }
-*/
 	return $obj;
 }
-function inout($in, $out)
+function inout($in, $out, $session)
 {
 	global $con;
 	$obj = null;

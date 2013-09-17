@@ -3,7 +3,7 @@ var bus_out = 0;
 var HaveToWait = false;
 var MsgWait = "Sending...";
 var MsgNextStation = "Next Station";
-var MsgErrorConnection = "Here is no internet. Data was not sent.";
+var MsgErrorConnection = "Here is no internet. Data was not sent. Tap to retry.";
 var MsgErrorAuth = "Server have not accepted data.<a href='/index.php' Check authorization</a>.";
 function UpdateButton()
 {
@@ -33,7 +33,8 @@ function NextStation()
     {
 	$("#b_send").html(MsgWait);
 	HaveToWait = true;
-	json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out});
+	session = getCookie('session');
+	json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session});
 	$.ajax({
 	    url:"/server.php",
 	    type:"post",
@@ -58,6 +59,7 @@ function NextStation()
 	    error: function()
 	    {
 		$("#b_send").html(MsgErrorConnection);
+		HaveToWait = false;
 	    }
 	});
     }
