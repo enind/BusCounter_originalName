@@ -18,6 +18,8 @@ switch($data->type)
 	     break;
 	case "auth":
 	     $res = auth($data->login,$data->pass);
+	case "inout":
+	     $red = inout($data->in,$data->out);
 }
 echo json_encode($res);
 $con->close();
@@ -45,6 +47,14 @@ function auth($login, $pass)
 		   echo $row["login"] . "<br>";
 		   }
 */
+	return $obj;
+}
+function inout($in, $out)
+{
+	global $con;
+	$obj = null;
+	$obj->in = $in;
+	$obj->out = $out;
 	return $obj;
 }
 ?>
