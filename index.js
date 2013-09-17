@@ -1,3 +1,4 @@
+var msg_wrong_pass = "<span class='text_bad'>Login or password are worng</span>";
 function Login()
 {
     var dat = {};
@@ -12,7 +13,15 @@ function Login()
 	    data: {json:json},
 	    success: function(ret)
 	    {
-		alert(ret);
+		ret = eval('('+ret+')');
+		if(ret.status)
+		{
+		    location.href = "/clicker.php";
+		}
+		else
+		{
+		    $("#status").html(msg_wrong_pass);
+		}
 	    }
 	});
     return false;
