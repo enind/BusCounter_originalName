@@ -1,5 +1,6 @@
-<?php
-?>
+<style>
+@import "style.css" all;
+</style>
 <script src="jquery.js"></script>
 <script src="cookie.js"></script>
 <script src="index.js"></script>

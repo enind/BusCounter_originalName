@@ -19,7 +19,7 @@ switch($data->type)
 	case "auth":
 	     $res = auth($data->login,$data->pass);
 	case "inout":
-	     $red = inout($data->in,$data->out);
+	     $res = inout($data->bus_in,$data->bus_out);
 }
 echo json_encode($res);
 $con->close();
@@ -55,6 +55,7 @@ function inout($in, $out)
 	$obj = null;
 	$obj->in = $in;
 	$obj->out = $out;
+	$obj->status = true;
 	return $obj;
 }
 ?>

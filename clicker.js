@@ -1,24 +1,64 @@
-var in = 0;
-var out = 0;
+var bus_in = 0;
+var bus_out = 0;
+var HaveToWait = false;
+var MsgWait = "Sending...";
+var MsgNextStation = "Next Station";
+var MsgErrorConnection = "Here is no internet. Data was not sent.";
+var MsgErrorAuth = "Server have not accepted data.<a href='/index.php' Check authorization</a>.";
+function UpdateButton()
+{
+    $("#b_in").html("In<br>"+bus_in);
+    $("#b_out").html("Out<br>"+bus_out);
+}
 function In()
 {
-	in++;
+    if(!HaveToWait)
+    {
+	bus_in++;
+	UpdateButton();
+    }
 }
 
 function Out()
 {
-    out++;
+    if(!HaveToWait)
+    {
+	bus_out++;
+	UpdateButton();
+    }
 }
 function NextStation()
 {
-    json = JSON.stringify({type:"inout",in:in,out:out});
-    $.ajax({
-	url:"/server.php",
-	type:"post",
-	data: {json:json},
-	success: function(ret)
-	{
-	    alert(ret);
-	}
+    if(!HaveToWait)
+    {
+	$("#b_send").html(MsgWait);
+	HaveToWait = true;
+	json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out});
+	$.ajax({
+	    url:"/server.php",
+	    type:"post",
+	    data: {json:json},
+	    success: function(ret)
+	    {
+		ret = eval('('+ret+')');
+		if(!ret.status)
+		{
+		    $("#b_send").html(MsgErrorAuth);
+		}
+		else
+		{
+		    $("#b_send").html(MsgNextStation);
+		    HaveToWait = false;
+		    bus_in = 0;
+		    bus_out = 0;
+		    UpdateButton();
+		}
+		
+	    },
+	    error: function()
+	    {
+		$("#b_send").html(MsgErrorConnection);
+	    }
+	});
     }
 }

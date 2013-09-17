@@ -10,15 +10,15 @@
 <script src="jquery.js"></script>
 <script src="clicker.js"></script>
 </head>
-<body>
+<body onload="UpdateButton();">
 <div class="clicker_box">
-     <div class="clicker_button_left clicker_button" onclick="In()">
+     <div id="b_out" class="clicker_button_left clicker_button" onclick="Out()">
      	  Out
      </div>
-     <div class="clicker_button_right clicker_button" onclick="Out()">
+     <div id="b_in" class="clicker_button_right clicker_button" onclick="In()">
      	  In
      </div>
-     <div class="send_button" onclick="NextStation()">Next Station</div>
+     <div id="b_send" class="send_button" onclick="NextStation()">Next Station</div>
 </div>
 </body>
 </html>
