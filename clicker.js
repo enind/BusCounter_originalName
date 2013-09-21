@@ -35,7 +35,9 @@ function NextStation()
 	HaveToWait = true;
 	session = getCookie('session');
 	transport = getCookie('transport');
-	json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport});
+	time = new Date();
+	time = ''+time.getFullYear()+'-'+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds(); 
+	json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport,time:time});
 	$.ajax({
 	    url:"/server.php",
 	    type:"post",

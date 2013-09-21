@@ -20,7 +20,7 @@ switch($data->type)
 	     $res = auth($data->login,$data->pass);
 	     break;
 	case "inout":
-	     $res = inout($data->bus_in,$data->bus_out,$data->session,$data->transport);
+	     $res = inout($data->bus_in,$data->bus_out,$data->session,$data->transport,$data->time);
 	     break;
 }
 echo json_encode($res);
@@ -48,7 +48,7 @@ function auth($login, $pass)
 	}
 	return $obj;
 }
-function inout($in, $out, $session, $transport)
+function inout($in, $out, $session, $transport, $time)
 {
 	global $con;
 	$obj = null;
@@ -56,8 +56,7 @@ function inout($in, $out, $session, $transport)
 	$obj->status = $ret->auth;
 	if($obj->status)
 	{
-		$sql = "INSERT INTO `count` (`user`,`time`,`in`,`out`,`transport`) VALUES ('$ret->login',GETUTCDATE(),'$in','$out','$transport')";
-		echo $sql;
+		$sql = "INSERT INTO `count` (`user`,`time`,`in`,`out`,`transport`) VALUES ('$ret->login','$time','$in','$out','$transport')";
 		$con->query($sql);
 	}
 	return $obj;

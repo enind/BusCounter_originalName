@@ -16,7 +16,7 @@ function Login()
 		ret = eval('('+ret+')');
 		if(ret.status)
 		{
-		    setCookie("tarnsport",$("#transport").val(),{expires: 8*60*60});
+		    setCookie("transport",$("#transport").val(),{expires: 8*60*60});
 		    setCookie("session",""+ret.session,{expires: 8*60*60});
 		    location.href = "/clicker.php";
 		}
