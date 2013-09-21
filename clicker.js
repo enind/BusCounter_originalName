@@ -34,7 +34,8 @@ function NextStation()
 	$("#b_send").html(MsgWait);
 	HaveToWait = true;
 	session = getCookie('session');
-	json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session});
+	transport = getCookie('transport');
+	json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport});
 	$.ajax({
 	    url:"/server.php",
 	    type:"post",

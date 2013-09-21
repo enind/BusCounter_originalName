@@ -8,6 +8,7 @@
 <table>
 	<tr><td>Login:</td><td><input id="login"></td></tr>
 	<tr><td>Password:</td><td><input id="pass" type="password"></td></tr>
+	<tr><td>Transport:</td><td><input id="transport"></td></tr>
 </table>
 <div id="status"></div>
 <input type=submit>
