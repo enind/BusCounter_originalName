@@ -11,12 +11,12 @@
 <body onload="UpdateButton();">
       <div class="clicker_box">
       	   <div id="b_out" class="clicker_button_left clicker_button" onclick="Out()">
-     	   	Out
+     	   	вЫшел
      	  </div>
     	  <div id="b_in" class="clicker_button_right clicker_button" onclick="In()">
-     	   	In
+     	   	вОшел
      	</div>
-	<div id="b_send" class="send_button" onclick="NextStation()">Next Station</div>
+	<div id="b_send" class="send_button" onclick="NextStation()">Отправить</div>
 	</div>
 </body>
 </html>

@@ -7,8 +7,9 @@
 <form onsubmit="Login();return false;" action="" method="post">
 <table>
 	<tr><td>Login:</td><td><input id="login"></td></tr>
-	<tr><td>Password:</td><td><input id="pass" type="password"></td></tr>
-	<tr><td>Transport:</td><td><input id="transport"></td></tr>
+	<tr><td>Пароль:</td><td><input id="pass" type="password"></td></tr>
+	<tr><td>Маршрут:</td><td><input id="route"></td></tr>
+	<tr><td>Гос. номер:</td><td><input id="transport"></td></tr>
 </table>
 <div id="status"></div>
 <input type=submit>

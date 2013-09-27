@@ -1,4 +1,4 @@
-var msg_wrong_pass = "<span class='text_bad'>Login or password are incorrect</span>";
+var msg_wrong_pass = "<span class='text_bad'>Логин или пароль не правильны.</span>";
 function Login()
 {
     var dat = {};
@@ -17,6 +17,7 @@ function Login()
 		if(ret.status)
 		{
 		    setCookie("transport",$("#transport").val(),{expires: 8*60*60});
+		    setCookie("route",$("#route").val(),{expires: 8*60*60});
 		    setCookie("session",""+ret.session,{expires: 8*60*60});
 		    location.href = "/clicker.php";
 		}

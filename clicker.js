@@ -1,14 +1,14 @@
 var bus_in = 0;
 var bus_out = 0;
 var HaveToWait = false;
-var MsgWait = "Sending...";
-var MsgNextStation = "Next Station";
-var MsgErrorConnection = "Here is no internet. Data was not sent. Tap to retry.";
-var MsgErrorAuth = "Server have not accepted data.<a href='/index.php' Check authorization</a>.";
+var MsgWait = "Отправка...";
+var MsgNextStation = "Отправить";
+var MsgErrorConnection = "Соединение отсутсвует. Попробуйте позже.";
+var MsgErrorAuth = "Вы не авторизованы.<a href='/index.php'> Авторизация</a>.";
 function UpdateButton()
 {
-    $("#b_in").html("In<br>"+bus_in);
-    $("#b_out").html("Out<br>"+bus_out);
+    $("#b_in").html("вОшел<br>"+bus_in);
+    $("#b_out").html("вЫшел<br>"+bus_out);
 }
 function In()
 {
@@ -35,9 +35,10 @@ function NextStation()
 	HaveToWait = true;
 	session = getCookie('session');
 	transport = getCookie('transport');
+	route = getCookie('route');
 	time = new Date();
 	time = ''+time.getFullYear()+'-'+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds(); 
-	json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport,time:time});
+	json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport,time:time,route:route});
 	$.ajax({
 	    url:"/server.php",
 	    type:"post",
