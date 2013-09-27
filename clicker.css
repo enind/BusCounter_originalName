@@ -1,11 +1,17 @@
+html
+{
+    height: 100%;
+    width: 100%;
+}
 body
 {
     margin: 0px;
+    height: 100%;
     background-color: #F0FFFF;
     -webkit-user-select: none; /* Chrome/Safari */        
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+ */
-
+    -webkit-text-size-adjust: none;
     /* Rules below not implemented in browsers yet */
     -o-user-select: none;
     user-select: none;
@@ -21,16 +27,17 @@ body
     position: absolute;
     width: 49%;
     height: 80%;
-    background-color: #8ed465;
     text-align: center;
     font-size: 30pt;
 }
 .clicker_button_left
 {
+    background-color: #58ACFA;
     left: 0px;
 }
 .clicker_button_right
 {
+    background-color: #8ed465;
     right: 0px;
 }
 .send_button
@@ -39,7 +46,7 @@ body
     bottom: 0px;
     height: 19%;
     width: 100%;
-    background-color: #1E90FF;
+    background-color: #BDBDBD;
      text-align: center;
     font-size: 30pt;
 }

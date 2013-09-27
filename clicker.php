@@ -4,6 +4,7 @@
 	@import "clicker.css" all;
 	</style>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta charset="UTF-8">
 	<script src="cookie.js"></script>
 	<script src="jquery.js"></script>
 	<script src="clicker.js"></script>
