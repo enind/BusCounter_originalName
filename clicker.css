@@ -25,8 +25,9 @@ body
 .clicker_button
 {
     position: absolute;
+    top: 21%;
     width: 49%;
-    height: 80%;
+    height: 59%;
     text-align: center;
     font-size: 30pt;
 }
@@ -64,14 +65,14 @@ body
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: red;
+    background-color: #5882FA;
     display: none;
 }
 .menu_button_close
 {
     position: absolute;
     width: 100%;
-    height: 20%;
+    height: 19%;
     bottom: 0px;
     background-color: #BDBDBD;
     text-align: center;
