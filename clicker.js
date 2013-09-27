@@ -68,3 +68,13 @@ function NextStation()
 	});
     }
 }
+
+function ShowMenu()
+{
+    $("#menu").css("display","block");
+}
+
+function CloseMenu()
+{
+    $("#menu").css("display","none");
+}
