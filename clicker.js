@@ -20,11 +20,12 @@ function In()
 	UpdateButton();
     }
 }
-function DIn()
+function DecIn()
 {
     if(!HaveToWait)
     {
 	bus_in--;
+	CloseMenu();
 	UpdateButton();
     }
 }
@@ -38,7 +39,7 @@ function Out()
 	UpdateButton();
     }
 }
-function DOut()
+function DecOut()
 {
     if(!HaveToWait)
     {

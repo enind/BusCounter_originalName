@@ -23,11 +23,11 @@
     </div>
     
     <div id="menu" class="clicker_block_menu">
-      <div class="menu_button" onclick="ReturnBack()">Конец рейса</div>
+      <div class="menu_button" onclick="ReturnBack()">К/р</div>
       <div class="menu_button">Button2</div>
-      <div class="menu_button" onclick="DOut();">-1</div>
-      <div class="menu_button" onlcick="DIn();">-1</div>
-      <div class="menu_button_close" onclick="CloseMenu();">Закрыть</div>
+      <div class="menu_button" onclick="DecOut();">-1</div>
+      <div class="menu_button" onclick="DecIn();">-1</div>
+      <div class="menu_button_close" onclick="CloseMenu();">Обратно</div>
     </div>
 </body>
 </html>
