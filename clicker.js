@@ -5,6 +5,8 @@ var MsgWait = "Отправка...";
 var MsgNextStation = "Отправить";
 var MsgErrorConnection = "Соединение отсутсвует. Попробуйте позже.";
 var MsgErrorAuth = "Вы не авторизованы. <a href='/index.php'>Авторизация</a>.";
+var SendData = new Array();
+var dat_n = 0;
 function UpdateButton()
 {
     $("#b_in").html("вОшел<br>"+bus_in);
@@ -45,47 +47,62 @@ function DOut()
 	UpdateButton();
     }
 }
-
+function AddToSend()
+{
+    session = getCookie('session');
+    transport = getCookie('transport');
+    route = getCookie('route');
+    time = new Date();
+    time = ''+time.getFullYear()+'-'+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds(); 
+    json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport,time:time,route:route});
+    SendData[dat_n] =
+	{
+	    json:json,
+	    sent:false
+	};
+    bus_in = 0;
+    bus_out = 0;
+    dat_n++;
+}
 function NextStation()
 {
-    if(!HaveToWait)
+    AddToSend();
+    SendAllData();
+    UpdateButton();
+}
+function SendAllData()
+{
+    $("#b_send").html(MsgWait);
+
+    for(i = 0; i < dat_n; i++)
     {
-	$("#b_send").html(MsgWait);
-	HaveToWait = true;
-	session = getCookie('session');
-	transport = getCookie('transport');
-	route = getCookie('route');
-	time = new Date();
-	time = ''+time.getFullYear()+'-'+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds(); 
-	json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport,time:time,route:route});
-	$.ajax({
-	    url:"/server.php",
-	    type:"post",
-	    data: {json:json},
-	    success: function(ret)
-	    {
-		ret = eval('('+ret+')');
-		if(!ret.status)
+	if(!SendData[i].sent)
+	{
+	    $.ajax({
+		url:"/server.php",
+		type:"post",
+		data: {json:SendData[i].json},
+		n: i,
+		success: function(ret)
 		{
-		    $("#b_send").html(MsgErrorAuth);
-		}
-		else
+		    ret = eval('('+ret+')');
+		    if(!ret.status)
+		    {
+			$("#b_send").html(MsgErrorAuth);
+		    }
+		    else
+		    {
+			SendData[this.n].sent = true;
+		    }
+		},
+		error: function()
 		{
-		    $("#b_send").html(MsgNextStation);
-		    HaveToWait = false;
-		    bus_in = 0;
-		    bus_out = 0;
-		    UpdateButton();
+		    $("#b_send").html(MsgErrorConnection);
 		}
-		
-	    },
-	    error: function()
-	    {
-		$("#b_send").html(MsgErrorConnection);
-		HaveToWait = false;
-	    }
-	});
+	    });
+	}
     }
+    $("#b_send").html(MsgNextStation);
 }
 
 function ShowMenu()
