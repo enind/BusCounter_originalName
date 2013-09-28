@@ -4,7 +4,7 @@ var HaveToWait = false;
 var MsgWait = "Отправка...";
 var MsgNextStation = "Отправить";
 var MsgErrorConnection = "Соединение отсутсвует. Попробуйте позже.";
-var MsgErrorAuth = "Вы не авторизованы.<a href='/index.php'> Авторизация</a>.";
+var MsgErrorAuth = "Вы не авторизованы. <a href='/index.php'>Авторизация</a>.";
 function UpdateButton()
 {
     $("#b_in").html("вОшел<br>"+bus_in);
@@ -18,15 +18,34 @@ function In()
 	UpdateButton();
     }
 }
+function DIn()
+{
+    if(!HaveToWait)
+    {
+	bus_in--;
+	UpdateButton();
+    }
+}
 
 function Out()
 {
     if(!HaveToWait)
     {
 	bus_out++;
+	CloseMenu();
 	UpdateButton();
     }
 }
+function DOut()
+{
+    if(!HaveToWait)
+    {
+	bus_out--;
+	CloseMenu();
+	UpdateButton();
+    }
+}
+
 function NextStation()
 {
     if(!HaveToWait)

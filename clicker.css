@@ -78,3 +78,14 @@ body
     text-align: center;
     font-size: 30pt;
 }
+.menu_button
+{
+    position: relative;
+    margin-top: 5px;
+    width: 49%;
+    height: 39%;
+    display: inline-block;
+    background-color: white;
+    text-align: center;
+    font-size: 30pt;
+}
