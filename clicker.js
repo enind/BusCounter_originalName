@@ -47,14 +47,14 @@ function DOut()
 	UpdateButton();
     }
 }
-function AddToSend()
+function AddToSend(return_back)
 {
     session = getCookie('session');
     transport = getCookie('transport');
     route = getCookie('route');
     time = new Date();
     time = ''+time.getFullYear()+'-'+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds(); 
-    json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport,time:time,route:route});
+    json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport,time:time,route:route,return_back:return_back});
     SendData[dat_n] =
 	{
 	    json:json,
@@ -64,9 +64,16 @@ function AddToSend()
     bus_out = 0;
     dat_n++;
 }
+function ReturnBack()
+{
+    AddToSend(true);
+    SendAllData();
+    UpdateButton();
+    CloseMenu();
+}
 function NextStation()
 {
-    AddToSend();
+    AddToSend(false);
     SendAllData();
     UpdateButton();
 }
@@ -85,6 +92,7 @@ function SendAllData()
 		n: i,
 		success: function(ret)
 		{
+		    console.log(ret);
 		    ret = eval('('+ret+')');
 		    if(!ret.status)
 		    {
