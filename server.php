@@ -56,7 +56,7 @@ function inout($in, $out, $session, $transport, $route, $time)
 	$obj->status = $ret->auth;
 	if($obj->status)
 	{
-		$sql = "INSERT INTO `count` (`user`,`time`,`in`,`out`,`transport`,`route`) VALUES ('$ret->login','$time','$in','$out','$transport','$route')";
+		$sql = "INSERT INTO `count` (`user`,`time`,`in`,`out`,`transport`,`route`,`server_time`) VALUES ('$ret->login','$time','$in','$out','$transport','$route',NOW())";
 		$con->query($sql);
 	}
 	return $obj;
