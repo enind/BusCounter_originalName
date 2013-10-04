@@ -2,15 +2,15 @@ var bus_in = 0;
 var bus_out = 0;
 var HaveToWait = false;
 var MsgWait = "Отправка...";
-var MsgNextStation = "Отправить";
+var MsgNextStation = "Конец ввода";
 var MsgErrorConnection = "Соединение отсутсвует. Попробуйте позже.";
 var MsgErrorAuth = "Вы не авторизованы. <a href='/index.php'>Авторизация</a>.";
 var SendData = new Array();
 var dat_n = 0;
 function UpdateButton()
 {
-    $("#b_in").html("вОшел<br>"+bus_in);
-    $("#b_out").html("вЫшел<br>"+bus_out);
+    $("#b_in").html("вОшло<br>"+bus_in);
+    $("#b_out").html("вЫшло<br>"+bus_out);
     $("#menu_b_in").html(bus_in);
     $("#menu_b_out").html(bus_out);
 }
