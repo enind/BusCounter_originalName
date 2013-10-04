@@ -53,7 +53,8 @@ body
 }
 .clicker_button_menu
 {
-    background-color: #BDBDBD;
+    background-color: grey;
+    color: white;
     text-align: center;
     font-size: 30pt;
     width: 100%;

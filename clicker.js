@@ -11,6 +11,8 @@ function UpdateButton()
 {
     $("#b_in").html("вОшел<br>"+bus_in);
     $("#b_out").html("вЫшел<br>"+bus_out);
+    $("#menu_b_in").html(bus_in);
+    $("#menu_b_out").html(bus_out);
 }
 function In()
 {
@@ -24,8 +26,8 @@ function DecIn()
 {
     if(!HaveToWait)
     {
-	bus_in--;
-	CloseMenu();
+	if(bus_in > 0) bus_in--;
+	//CloseMenu();
 	UpdateButton();
     }
 }
@@ -35,7 +37,6 @@ function Out()
     if(!HaveToWait)
     {
 	bus_out++;
-	CloseMenu();
 	UpdateButton();
     }
 }
@@ -43,8 +44,8 @@ function DecOut()
 {
     if(!HaveToWait)
     {
-	bus_out--;
-	CloseMenu();
+	if(bus_out > 0) bus_out--;
+	//CloseMenu();
 	UpdateButton();
     }
 }
@@ -122,4 +123,30 @@ function ShowMenu()
 function CloseMenu()
 {
     $("#menu").css("display","none");
+}
+function KeyDown(event){
+    var keyCode = ('which' in event) ? event.which : event.keyCode;
+    console.log (keyCode);
+    var left = [81,87,69,82,84,65,83,68,70,71,90,88,67,86,66,37];
+    var right = [221,219,222,186,190,191,77,188,75,76,79,80,85,73,72,74,66,78,187,189,8,220,48,57,56,55,39];
+    for(i = 0; i < left.length; i++)
+    {
+	if(keyCode == left[i])
+	{
+	    Out();
+	    return;
+	}
+    }
+    for(i = 0; i < right.length; i++)
+    {
+	if(keyCode == right[i])
+	{
+	    In();
+	    return;
+	}
+    }
+    if(keyCode == 32)//space
+    {
+	NextStation();
+    }
 }
