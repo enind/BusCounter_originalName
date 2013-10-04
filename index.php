@@ -10,7 +10,7 @@
 	<meta charset="utf-8"/>
 </head>
 <body>
-
+<h1>BusCounter</h1>
 <form onsubmit="Login();return false;" action="" method="post">
 <table>
 	<tr><td>Login:</td><td><input id="login"></td></tr>

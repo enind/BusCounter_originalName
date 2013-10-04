@@ -54,9 +54,13 @@ function AddToSend(return_back)
     session = getCookie('session');
     transport = getCookie('transport');
     route = getCookie('route');
+    transporttype = getCookie('transporttype');
+    mark = getCookie('mark');
+    capability = getCookie('capability');
+    timetable = getCookie('timetable');
     time = new Date();
     time = ''+time.getFullYear()+'-'+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds(); 
-    json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport,time:time,route:route,return_back:return_back});
+    json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport,time:time,route:route,transporttype:transporttype,mark:mark,capability:capability,timetable:timetable,return_back:return_back});
     SendData[dat_n] =
 	{
 	    json:json,
