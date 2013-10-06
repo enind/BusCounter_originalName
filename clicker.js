@@ -1,12 +1,15 @@
 var bus_in = 0;
 var bus_out = 0;
-var HaveToWait = false;
+var Sending = false;
 var MsgWait = "Отправка...";
 var MsgNextStation = "Конец ввода";
 var MsgErrorConnection = "Соединение отсутсвует. Попробуйте позже.";
 var MsgErrorAuth = "Вы не авторизованы. <a href='/index.php'>Авторизация</a>.";
 var SendData = new Array();
 var dat_n = 0;
+var GPS_x = 0;
+var GPS_y = 0;
+setInterval(UpdateGPS,1000);
 function UpdateButton()
 {
     $("#b_in").html("вОшло<br>"+bus_in);
@@ -16,38 +19,24 @@ function UpdateButton()
 }
 function In()
 {
-    if(!HaveToWait)
-    {
-	bus_in++;
-	UpdateButton();
-    }
+    bus_in++;
+    UpdateButton();
 }
 function DecIn()
 {
-    if(!HaveToWait)
-    {
-	if(bus_in > 0) bus_in--;
-	//CloseMenu();
-	UpdateButton();
-    }
+    if(bus_in > 0) bus_in--;
+    UpdateButton();
 }
 
 function Out()
 {
-    if(!HaveToWait)
-    {
-	bus_out++;
-	UpdateButton();
-    }
+    bus_out++;
+    UpdateButton();
 }
 function DecOut()
 {
-    if(!HaveToWait)
-    {
-	if(bus_out > 0) bus_out--;
-	//CloseMenu();
-	UpdateButton();
-    }
+    if(bus_out > 0) bus_out--;
+    UpdateButton();
 }
 function AddToSend(return_back)
 {
@@ -60,7 +49,24 @@ function AddToSend(return_back)
     timetable = getCookie('timetable');
     time = new Date();
     time = ''+time.getFullYear()+'-'+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds(); 
-    json = JSON.stringify({type:"inout",bus_in:bus_in,bus_out:bus_out,session:session,transport:transport,time:time,route:route,transporttype:transporttype,mark:mark,capability:capability,timetable:timetable,return_back:return_back});
+    json = JSON.stringify(
+	{
+	    type: "inout",
+	    bus_in: bus_in,
+	    bus_out: bus_out,
+	    session: session,
+	    transport: transport,
+	    time: time,
+	    route: route,
+	    transporttype: transporttype,
+	    mark: mark,
+	    capability: capability,
+	    timetable: timetable,
+	    return_back: return_back,
+	    GPS_x: ""+GPS_x,
+	    GPS_y: ""+GPS_y
+	});
+    console.log(json);
     SendData[dat_n] =
 	{
 	    json:json,
@@ -85,38 +91,43 @@ function NextStation()
 }
 function SendAllData()
 {
-    $("#b_send").html(MsgWait);
-
-    for(i = 0; i < dat_n; i++)
+    if(!Sending)
     {
-	if(!SendData[i].sent)
+	Sending = true;
+	$("#b_send").html(MsgWait);
+
+	for(i = 0; i < dat_n; i++)
 	{
-	    $.ajax({
-		url:"/server.php",
-		type:"post",
-		data: {json:SendData[i].json},
-		n: i,
-		success: function(ret)
-		{
-		    console.log(ret);
-		    ret = eval('('+ret+')');
-		    if(!ret.status)
+	    if(!SendData[i].sent)
+	    {
+		$.ajax({
+		    url:"/server.php",
+		    type:"post",
+		    data: {json:SendData[i].json},
+		    n: i,
+		    success: function(ret)
 		    {
-			$("#b_send").html(MsgErrorAuth);
-		    }
-		    else
+			console.log(ret);
+			ret = eval('('+ret+')');
+			if(!ret.status)
+			{
+			    $("#b_send").html(MsgErrorAuth);
+			}
+			else
+			{
+			    SendData[this.n].sent = true;
+			}
+		    },
+		    error: function()
 		    {
-			SendData[this.n].sent = true;
+			$("#b_send").html(MsgErrorConnection);
 		    }
-		},
-		error: function()
-		{
-		    $("#b_send").html(MsgErrorConnection);
-		}
-	    });
+		});
+	    }
 	}
+	$("#b_send").html(MsgNextStation);
+	Sending = false;
     }
-    $("#b_send").html(MsgNextStation);
 }
 
 function ShowMenu()
@@ -153,4 +164,21 @@ function KeyDown(event){
     {
 	NextStation();
     }
+}
+function UpdateGPS()
+{
+    if (navigator.geolocation)
+    {
+	navigator.geolocation.getCurrentPosition(UpdateGPSHandler);
+    }
+    else
+    {
+	x.innerHTML="Geolocation is not supported by this browser.";
+    }
+}
+function UpdateGPSHandler(position)
+{
+    GPS_x = position.coords.latitude;
+    GPS_y = position.coords.longitude;
+    console.log({x:GPS_x,y:GPS_y});
 }

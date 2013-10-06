@@ -20,7 +20,7 @@ switch($data->type)
 	     $res = auth($data->login,$data->pass);
 	     break;
 	case "inout":
-	     $res = inout($data->bus_in,$data->bus_out,$data->session,$data->transport,$data->route,$data->transporttype,$data->mark,$data->capability,$data->timetable,$data->time,$data->return_back);
+	     $res = inout($data->bus_in,$data->bus_out,$data->session,$data->transport,$data->route,$data->transporttype,$data->mark,$data->capability,$data->timetable,$data->time,$data->return_back,$data->GPS_x,$data->GPS_y);
 	     break;
 }
 echo json_encode($res);
@@ -48,7 +48,7 @@ function auth($login, $pass)
 	}
 	return $obj;
 }
-function inout($in, $out, $session, $transport, $route,$transporttype,$mark,$capability,$timetable, $time, $return_back)
+function inout($in, $out, $session, $transport, $route,$transporttype,$mark,$capability,$timetable, $time, $return_back, $GPS_x, $GPS_y)
 {
 	global $con;
 	$obj = null;
@@ -56,7 +56,7 @@ function inout($in, $out, $session, $transport, $route,$transporttype,$mark,$cap
 	$obj->status = $ret->auth;
 	if($obj->status)
 	{
-		$sql = "INSERT INTO `count` (`user`,`time`,`in`,`out`,`transport`,`route`,`transporttype`,`mark`,`capability`,`timetable`,`server_time`,`return_back`) VALUES ('$ret->login','$time','$in','$out','$transport','$route','$transporttype','$mark','$capability','$timetable',NOW(),'$return_back')";
+		$sql = "INSERT INTO `count` (`user`,`time`,`in`,`out`,`transport`,`route`,`transporttype`,`mark`,`capability`,`timetable`,`server_time`,`return_back`,`GPS_x`,`GPS_y`) VALUES ('$ret->login','$time','$in','$out','$transport','$route','$transporttype','$mark','$capability','$timetable',NOW(),'$return_back','$GPS_x','$GPS_y')";
 		$con->query($sql);
 	}
 	return $obj;
