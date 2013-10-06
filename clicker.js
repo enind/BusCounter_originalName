@@ -10,6 +10,7 @@ var dat_n = 0;
 var GPS_x = 0;
 var GPS_y = 0;
 setInterval(UpdateGPS,1000);
+setInterval(ClearMem,1000);
 function UpdateButton()
 {
     $("#b_in").html("вОшло<br>"+bus_in);
@@ -181,4 +182,15 @@ function UpdateGPSHandler(position)
     GPS_x = position.coords.latitude;
     GPS_y = position.coords.longitude;
     console.log({x:GPS_x,y:GPS_y});
+}
+function ClearMem()
+{
+    for(i = 0;i,dat_n;i++)
+    {
+	if(!SendData[i].sent)
+	{
+	    return;
+	}
+    }
+    SendData = new Array();
 }
