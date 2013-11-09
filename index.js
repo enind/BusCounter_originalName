@@ -27,3 +27,6 @@ function Login()
 	});
     return false;
 }
+$(document).ready(function(){
+    $("#nojs").css("display","none");
+});

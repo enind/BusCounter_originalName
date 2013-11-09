@@ -19,6 +19,7 @@
 <div id="status"></div>
 <input type=submit value="Войти">
 </form>
-
+<h1 id="nojs">You have no JavaScript!<br>
+  JavaScript не работает</h1>
 </body>
 </html>

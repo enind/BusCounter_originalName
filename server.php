@@ -1,9 +1,5 @@
 <?php
-function db_connect()
-{
-	$con = mysqli_connect("mysql.hostinger.ru","u403157676_db","891621275","u403157676_bc") or die ("fuck");
-	return $con;
-}
+include "server.functions.php";
 ?>
 <?php
 $data = $_REQUEST["json"];

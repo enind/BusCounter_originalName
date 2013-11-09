@@ -185,7 +185,7 @@ function UpdateGPSHandler(position)
 }
 function ClearMem()
 {
-    for(i = 0;i,dat_n;i++)
+    for(i = 0;i<dat_n;i++)
     {
 	if(!SendData[i].sent)
 	{
