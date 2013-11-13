@@ -58,19 +58,5 @@ function inout($in, $out, $session, $transport, $route,$transporttype,$mark,$cap
 	return $obj;
 
 }
-function check_auth($session)
-{
-	global $con;
-	$sql = "SELECT * FROM `login` WHERE `session`='$session'";
-	$result = $con->query($sql);
-	$ret->auth = false;
-	if($result->num_rows!=0)
-	{
-		$ret->auth = true;
-		$row = (mysqli_fetch_array($result));
-		$ret->login = $row["login"];
-	}
-	return $ret;
-}
 
 ?>
