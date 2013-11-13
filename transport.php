@@ -22,6 +22,6 @@
 <div id="status"></div>
 <input type=submit value="Сохранить">
 </form>
-
+<a href="db.php">DataBase Conterol Panel</a>
 </body>
 </html>
