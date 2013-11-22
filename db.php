@@ -47,8 +47,7 @@ $table .= "<tr><td>ID</td><td>User</td><td>Time</td><td>Server Time</td><td>In</
 $table .= "</table>";
 ?>
 <form>
-Запрос: <input type=text name='q' value="<?php echo $q;?>" style="width: 100%;"/><br>
-    <input type=submit value="Смотреть"/><br>
+Запрос: <input type=text id="q" name='q' value="<?php echo $q;?>" style="width: 100%;"/><br>
     <textarea rows="12" cols="100">
     CAST(time as time) between '12:00:00' and '14:00:00'
     user = 'tuser'
@@ -60,7 +59,19 @@ $table .= "</table>";
 
      Объединение: OR
      user = 'kriot' or CAST(time as time) between '12:00:00' and '14:00:00'    
-     </textarea>
+     </textarea><br>
+    Добавить условия в запрос:<br>
+    <table>
+      <tr><td>Пользователь:</td><td><input type="text" class="condition"><input type="button" value="Применить" class="add_condition" data-field="user"></td></tr>
+      <tr><td>Дата:</td><td><input type="text" class="condition" value="2013-10-31"><input type="button" value="Применить" class="add_condition" data-field="date"></td></tr>
+      <tr><td>Время:</td><td><input type="text" id="time_from" class="condition" value="12:00:00"><input type="text" id="time_to" class="condition" value="14:00:00"><input type="button" value="Применить" class="add_condition" data-field="time"></td></tr>
+      <tr><td>Марка:</td><td><input type="text" class="condition"><input type="button" value="Применить" class="add_condition" data-field="mark"></td></tr>
+      <tr><td>Маршрут:</td><td><input type="text" class="condition"><input type="button" value="Применить" class="add_condition" data-field="route"></td></tr>
+      <tr><td>Конечная:</td><td><input type="checkbox" id="ret_back" class="condition"><input type="button" value="Применить" class="add_condition" data-field="return_back"></td></tr>
+      <tr><td>Есть координаты:</td><td><input type="checkbox" id="is_there_coords" class="condition"><input type="button" value="Применить" class="add_condition" data-field="there_is_coords"></td></tr>
+    </table>
+    <input type=button value="Сбросить условия" onclick="location.href='/db.php?q=1=1'"/><input type=submit value="Смотреть"/><br>
+    
      </form>
      <script>
      var data = <?php echo $datajson?>;
@@ -78,8 +89,9 @@ function make_line($dat)
 	 return $ret;
      }
 ?>
-<script src="map.js"></script>
+     <script src="filter.js"></script>
+     <script src="map.js"></script>
      <div id="map" style="width: 1000px; height: 800px"></div>
      </body>
-     </html>
+</html>
      
