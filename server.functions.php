@@ -33,6 +33,7 @@ function check_auth($session)
 		$ret->auth = true;
 		$row = (mysqli_fetch_array($result));
 		$ret->login = $row["login"];
+		$ret->admin = $row["admin"];
 	}
 	return $ret;
 }
