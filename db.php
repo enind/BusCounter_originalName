@@ -12,6 +12,7 @@
 $con = db_connect();
 $auth  = check_auth($_COOKIE["session"]);
 if(!$auth->auth) die ("Вы не авторизованы<br>You are not authorized<br><a href='/'>Login</a>");
+if(!$auth->admin) die ("Доступ закрыт. Вы не администратор.<br> Access denied. You are not administrator<br><a href='/'>Login</a>");
 if(isset($_REQUEST["q"]))
 {
     $q = $_REQUEST["q"];
