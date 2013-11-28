@@ -22,13 +22,26 @@ else
 }
 if($q=="") $q = "1=1";
 $sql = "SELECT * FROM `count` WHERE ".$q;
+$sqlmin = "SELECT MIN(time) AS mintime FROM count WHERE ".$q;
+$sqlmax = "SELECT MAX(time) AS maxtime FROM count WHERE ".$q;
+
 $result = $con->query($sql);
     
 if (!$result) {
-    $message  = 'Wrong Query: ' . mysql_error() . "\n";
+    $message  = 'Wrong Query: ' . $con->error . "\n";
     $message .= 'Query: ' . $sql;
     die($message);
 }
+
+$min_res = $con->query($sqlmin);
+$max_res = $con->query($sqlmax);
+$row =  mysqli_fetch_array($min_res);
+$mintime = $row["mintime"];
+
+$row =  mysqli_fetch_array($max_res);
+$maxtime = $row["maxtime"];
+
+
 $table = "<table border=1 width=100%>";
 $table .= "<tr><td>ID</td><td>User</td><td>Time</td><td>Server Time</td><td>In</td><td>Out</td><td>Transport</td><td>Route</td><td>Mark</td><td>TransportType</td><td>Capability</td><td>Time Table</td><td>Return Back</td><td>GPS_x</td><td>GPS_y</td></tr>";
 $data = array();
@@ -42,7 +55,7 @@ while ($row = mysqli_fetch_array($result)) {
     $sum_out += $row['out'];
 }
 $datajson = json_encode($data);
-$table .= "<tr><td></td><td></td><td></td><td></td><td>$sum_in</td><td>$sum_out</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+$table .= "<tr><td></td><td></td><td style='text-align:right'>С: $mintime<br>По: $maxtime</td><td></td><td>$sum_in</td><td>$sum_out</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
 $table .= "<tr><td>ID</td><td>User</td><td>Time</td><td>Server Time</td><td>In</td><td>Out</td><td>Transport</td><td>Route</td><td>Mark</td><td>TransportType</td><td>Capability</td><td>Time Table</td><td>Return Back</td><td>GPS_x</td><td>GPS_y</td></tr>";
 $table .= "</table>";
 ?>
