@@ -18,6 +18,8 @@ switch($data->type)
 	case "inout":
 	     $res = inout($data->bus_in,$data->bus_out,$data->session,$data->transport,$data->route,$data->transporttype,$data->mark,$data->capability,$data->timetable,$data->time,$data->return_back,$data->GPS_x,$data->GPS_y);
 	     break;
+	case "reg":
+	     $res = register($data->session, $data->login,$data->pass,$data->fio,$data->admin);
 }
 echo json_encode($res);
 $con->close();
@@ -59,4 +61,19 @@ function inout($in, $out, $session, $transport, $route,$transporttype,$mark,$cap
 
 }
 
+function register($session, $login, $pass, $fio, $admin)
+{
+	global $con;	
+	$obj = null;
+	$ret = check_auth($session);
+	$new_session = rand(1,100000);
+	$obj->status = false;
+	if($ret->auth && $ret->admin)
+	{
+		$sql = "INSERT INTO `login` (`login`, `pass`, `session`, `admin`, `fio`) VALUES ('$login', '$pass', '$new_session', '$admin','$fio');";
+		$con->query($sql);
+		$obj->status = true;
+	}
+	return $obj;
+}
 ?>
