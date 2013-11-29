@@ -6,7 +6,7 @@
      </head>
      <body>
      <h1>Control Panel</h1>
-     <a herf="register.php">Регистрация нового пользователя</a>
+     <a href="register.php">Регистрация нового пользователя</a>
      <?php
      
      include "server.functions.php";
