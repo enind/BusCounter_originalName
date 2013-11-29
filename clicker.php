@@ -23,8 +23,8 @@
     </div>
     
     <div id="menu" class="clicker_block_menu">
-      <div class="menu_button" onclick="ReturnBack()">К/р</div>
-      <div class="menu_button">Button2</div>
+      <div class="menu_button mb_small" onclick="ReturnBack()">Круг</div>
+      <div class="menu_button mb_small" id="time"></div>
       <div class="menu_button" onclick="DecOut();">вЫшел<br>-1<br><span id="menu_b_out"></span></div>
       <div class="menu_button" onclick="DecIn();">вОшел<br>-1<br><span id="menu_b_in"></span></div>
       <div class="menu_button_close" onclick="CloseMenu();">Обратно</div>

@@ -11,6 +11,9 @@ var GPS_x = 0;
 var GPS_y = 0;
 setInterval(UpdateGPS,1000);
 setInterval(ClearMem,1000);
+$(document).ready(function(){
+    setInterval(TimeUpdate, 500);
+    });
 function UpdateButton()
 {
     $("#b_in").html("вОшло<br>"+bus_in);
@@ -193,4 +196,12 @@ function ClearMem()
 	}
     }
     SendData = new Array();
+    dat_n = 0;
+}
+function TimeUpdate()
+{
+    time = new Date();
+    time = ""+time.getHours()+":"+(time.getMinutes()<10?"0":"")+time.getMinutes()+":"+(time.getSeconds()<10?"0":"")+time.getSeconds(); 
+
+    $("#time").html(time);
 }
