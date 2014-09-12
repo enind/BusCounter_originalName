@@ -1,7 +1,8 @@
 <?php
 function db_connect()
 {
-	$con = mysqli_connect("mysql.hostinger.ru","u403157676_db","891621275","u403157676_bc") or die ("fuck");
+  //host, user, passwd, db_name
+	$con = mysqli_connect("mysql.hostinger.ru","u179731146_bc","2143658709","u179731146_db") or die ("Erroe at connecting: ".mysqli_error($con));
 	return $con;
 }
 
